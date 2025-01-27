@@ -1,7 +1,11 @@
 import React from 'react';
 import { Brain, Bot, Mic, Code, Database, Eye, Cpu, Sparkles, Github, Linkedin, Mail, Cloud, Workflow, Box, MessageSquare, Layers, Network, Boxes, Star } from 'lucide-react';
+import { Chatbot } from './chabot/chatbot';
 
 function App() {
+
+  const [open,setOpen] = React.useState(false);
+
   const projects = [
     {
       title: "Enterprise LLM Platform",
@@ -89,27 +93,24 @@ function App() {
   const testimonials = [
     {
       name: "John Smith",
-      company: "Tech Innovations Inc.",
       image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?fit=crop&w=100&h=100",
       rating: 5,
       project: "Enterprise LLM Platform",
       feedback: "Exceptional work on our LLM integration. The custom RAG pipeline significantly improved our document processing efficiency."
     },
     {
-      name: "Sarah Johnson",
-      company: "AI Solutions Co.",
+      name: "Kornelia Fedrich",
       image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?fit=crop&w=100&h=100",
       rating: 5,
-      project: "Voice AI System",
-      feedback: "The voice assistant implementation exceeded our expectations. The multi-language support is flawless."
+      project: "Guest House AI-booking Chatbot",
+      feedback: "Sandip delivered excellent work on our AI Agent development project, and it was a pleasure working with him. His communication was outstanding, always clear and professional, and he consistently met all milestones on time. Sandip demonstrated great patience and politeness throughout the project, which made collaborating with him seamless and enjoyable"
     },
     {
       name: "Michael Chen",
-      company: "Retail Analytics Ltd.",
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=100&h=100",
       rating: 5,
-      project: "Computer Vision System",
-      feedback: "The retail analytics solution provided invaluable insights into customer behavior patterns."
+      project: "Voice AI System",
+      feedback: "The voice assistant implementation exceeded our expectations. The multi-language support is flawless."
     }
   ];
 
@@ -137,6 +138,9 @@ function App() {
             <a href="#projects" className="px-6 py-3 border border-indigo-600 rounded-full hover:bg-indigo-600/10 transition">
               View Projects
             </a>
+            <div onClick={()=>setOpen(!open)} className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 rounded-full transition cursor-pointer">
+              Chat With AI Agent
+            </div>
           </div>
         </div>
         <div className="md:w-1/2 mt-12 md:mt-0">
@@ -162,6 +166,47 @@ function App() {
             <p>
               I specialize in building scalable AI systems using cutting-edge technologies like LangChain, CrewAI, and various LLM providers. My experience includes working with major cloud ML platforms and implementing sophisticated RAG systems with multiple vector stores.
             </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-gray-800/50 overflow-hidden">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12">Global Client Reviews</h2>
+          <div 
+            ref={testimonialRef}
+            className="flex space-x-6 overflow-x-auto pb-4 snap-x"
+            style={{ 
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none',
+              WebkitOverflowScrolling: 'touch'
+            }}
+          >
+            {testimonials.map((testimonial, index) => (
+              <div
+                key={index}
+                className="flex-none w-[350px] bg-gray-900/50 p-6 rounded-xl snap-start"
+              >
+                <div className="flex items-center mb-4">
+                  <img
+                    src={testimonial.image}
+                    alt={testimonial.name}
+                    className="w-12 h-12 rounded-full mr-4"
+                  />
+                  <div>
+                    <h3 className="font-semibold">{testimonial.name}</h3>
+                    {/* <p className="text-sm text-gray-400">{testimonial.company}</p> */}
+                  </div>
+                </div>
+                <div className="flex mb-2">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 text-yellow-500 fill-yellow-500" />
+                  ))}
+                </div>
+                <p className="text-gray-300 mb-2">Project: {testimonial.project}</p>
+                <p className="text-gray-400 italic">&quot;{testimonial.feedback}&quot;</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -216,46 +261,7 @@ function App() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-gray-800/50 overflow-hidden">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Global Client Reviews</h2>
-          <div 
-            ref={testimonialRef}
-            className="flex space-x-6 overflow-x-auto pb-4 snap-x"
-            style={{ 
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none',
-              WebkitOverflowScrolling: 'touch'
-            }}
-          >
-            {testimonials.map((testimonial, index) => (
-              <div
-                key={index}
-                className="flex-none w-[350px] bg-gray-900/50 p-6 rounded-xl snap-start"
-              >
-                <div className="flex items-center mb-4">
-                  <img
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    className="w-12 h-12 rounded-full mr-4"
-                  />
-                  <div>
-                    <h3 className="font-semibold">{testimonial.name}</h3>
-                    <p className="text-sm text-gray-400">{testimonial.company}</p>
-                  </div>
-                </div>
-                <div className="flex mb-2">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-                  ))}
-                </div>
-                <p className="text-gray-300 mb-2">Project: {testimonial.project}</p>
-                <p className="text-gray-400 italic">&quot;{testimonial.feedback}&quot;</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      
 
       {/* Contact Section */}
       <section id="contact" className="py-20">
@@ -280,6 +286,7 @@ function App() {
       <footer className="py-8 text-center text-gray-400">
         <p>© 2025-26 AI & ML Expert. All rights reserved.</p>
       </footer>
+      <Chatbot openbyparent={open} setClose={() => setOpen(!open)} />
     </div>
   );
 }
