@@ -1,11 +1,13 @@
-import React from 'react';
-import { Brain, Bot, Mic, Code, Database, Eye, Cpu, Sparkles, Github, Linkedin, Mail, Cloud, Workflow, Box, MessageSquare, Layers, Network, Boxes, Star } from 'lucide-react';
+import React, { useMemo } from 'react';
+import { Brain, Bot, Mic, Code, Database, Eye, Cpu, Sparkles, Github, Linkedin, Mail, Cloud, Workflow, Box, MessageSquare, Layers, Network, Boxes, Star,PhoneCallIcon } from 'lucide-react';
 import { Chatbot } from './chabot/chatbot';
 
+import { VoiceAgent } from './chabot/voiceAgent';
+
 function App() {
-
+  const [isVoiceAgentOpen, setIsVoiceAgentOpen] = React.useState(false);
   const [open,setOpen] = React.useState(false);
-
+ 
   const projects = [
     {
       title: "Enterprise LLM Platform",
@@ -132,14 +134,19 @@ function App() {
             Specialized in LLMs, Voice AI, and Enterprise AI Solutions
           </p>
           <div className="mt-8 flex gap-4 justify-center md:justify-start">
-            <a href="#contact" className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 rounded-full transition">
+            {/* <a href="#contact" className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 rounded-full transition">
               Contact Me
-            </a>
+            </a> */}
             <a href="#projects" className="px-6 py-3 border border-indigo-600 rounded-full hover:bg-indigo-600/10 transition">
               View Projects
             </a>
             <div onClick={()=>setOpen(!open)} className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 rounded-full transition cursor-pointer">
-              Chat With AI Agent
+            <Bot className="w-5 h-5" /> Chat With AI Agent
+            </div>
+            <div onClick={ (e:any)=> { 
+              setIsVoiceAgentOpen(true)
+              }} className="px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-full transition flex items-center gap-2 cursor-pointer">
+              <PhoneCallIcon className="w-5 h-5" />  Talk With Voice Agent
             </div>
           </div>
         </div>
@@ -287,7 +294,9 @@ function App() {
         <p>© 2025-26 AI & ML Expert. All rights reserved.</p>
       </footer>
       <Chatbot openbyparent={open} setClose={() => setOpen(!open)} />
+      <VoiceAgent isOpen={isVoiceAgentOpen} onClose={() => setIsVoiceAgentOpen(false)} />
     </div>
+    
   );
 }
 

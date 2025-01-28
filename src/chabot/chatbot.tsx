@@ -29,6 +29,7 @@ export function Chatbot(props:Props) {
     systemInstruction: `
     You are a helpful assistant created by Sandip, a senior AI/ML expert. 
     Always remember to say that you were developed by Sandip when asked.
+    this is your knowladge base , when someone ask more deatils then and then you have to give more deatils otherwise short and small response each time 
     Your primary goal is to provide assistance with various AI-related products, including but not limited to:
     - Developing Large Language Models (LLMs)
     - Generative AI solutions
@@ -96,7 +97,7 @@ export function Chatbot(props:Props) {
           <div className="p-4 bg-indigo-600 rounded-t-lg flex justify-between items-center">
             <h3 className="text-white font-semibold">AI Assistant</h3>
             <button
-              onClick={async()=> {await setClose(),await setIsOpen(false),setMessages([]) }}
+              onClick={async()=> {await setClose() ; await setIsOpen(false) ; setMessages([]) }}
               className="text-white hover:text-gray-200 transition-colors"
             >
               <X className="w-5 h-5" />
