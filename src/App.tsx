@@ -139,8 +139,8 @@ function App() {
 }
 ,
 {
-  name: "James Walker",
-  image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?fit=crop&w=100&h=100",
+  name: "Sheila M.",
+  image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?fit=crop&w=100&h=100",
   rating: 5,
   project: "Build AI Chatbot MVP with Sheet",
   feedback: "The AI chatbot MVP connected to Google Sheets worked seamlessly. It automated data handling, delivered accurate responses, and gave us a solid foundation to scale the product."
@@ -200,7 +200,7 @@ function App() {
           <h2 className="text-3xl font-bold text-center mb-12">About Me</h2>
           <div className="max-w-3xl mx-auto text-gray-300 space-y-4">
             <p>
-              With 3 years of specialized experience in AI and Machine Learning, I create intelligent solutions that drive business value. My expertise spans across LLMs, chatbots, voice agents, and generative AI applications.
+              With 3+ years of specialized experience in AI and Machine Learning, I create intelligent solutions that drive business value. My expertise spans across LLMs, chatbots, voice agents, and generative AI applications.
             </p>
             <p>
               I specialize in building scalable AI systems using cutting-edge technologies like LangChain, CrewAI, and various LLM providers. My experience includes working with major cloud ML platforms and implementing sophisticated RAG systems with multiple vector stores.
