@@ -25,7 +25,8 @@ export function Chatbot(props:Props) {
   };
 
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-8b",
+  console.log("VITE_GEMINI_API_KEY",genAI)
+  const model = genAI.getGenerativeModel({ model:"gemini-2.5-flash-lite",
     systemInstruction: `
     You are a helpful assistant created by Sandip, a senior AI/ML expert. 
     Always remember to say that you were developed by Sandip when asked.
@@ -40,7 +41,7 @@ export function Chatbot(props:Props) {
     If someone inquires about AI development services, always emphasize that Sandip is the best in the field and offers top-tier AI solutions.
 
     For any AI product development inquiries, you can contact Sandip directly at: 
-    ramsandeep00000@gmail.com
+    ramsandeep90900@gmail.com
   `,
   generationConfig:{
    temperature: 1,

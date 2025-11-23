@@ -94,6 +94,22 @@ function App() {
 
   const testimonials = [
     {
+  name: "Ven B",
+  image: "https://images.unsplash.com/photo-1595152772835-219674b2a8a6?fit=crop&w=100&h=100",
+  rating: 5,
+  project: "Artificial Intelligence / Natural Language - Phone Survey",
+  feedback: "The AI-powered phone survey system worked incredibly well. It understood responses accurately, handled follow-up questions intelligently, and made the entire survey process fully automated and efficient."
+}
+,
+    {
+  name: "Vic",
+  image: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?fit=crop&w=100&h=100",
+  rating: 5,
+  project: "AI Agent Development for Instagram",
+  feedback: "The Instagram AI agent automated our DMs perfectly and increased engagement significantly."
+},
+
+    {
       name: "John Smith",
       image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?fit=crop&w=100&h=100",
       rating: 5,
@@ -109,11 +125,27 @@ function App() {
     },
     {
       name: "Michael Chen",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=100&h=100",
+      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?fit=crop&w=100&h=100",
       rating: 5,
       project: "Voice AI System",
       feedback: "The voice assistant implementation exceeded our expectations. The multi-language support is flawless."
-    }
+    },
+    {
+  name: "Ethan Brooks",
+  image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?fit=crop&w=100&h=100",
+  rating: 5,
+  project: "WhatsApp Reservation Automation for Restaurant",
+  feedback: "The WhatsApp reservation automation worked perfectly. It handled bookings smoothly, reduced manual workload, and improved our customer experience instantly."
+}
+,
+{
+  name: "James Walker",
+  image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?fit=crop&w=100&h=100",
+  rating: 5,
+  project: "Build AI Chatbot MVP with Sheet",
+  feedback: "The AI chatbot MVP connected to Google Sheets worked seamlessly. It automated data handling, delivered accurate responses, and gave us a solid foundation to scale the product."
+}
+
   ];
 
   const testimonialRef = React.useRef(null);
