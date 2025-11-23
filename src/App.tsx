@@ -154,7 +154,7 @@ function App() {
           <div className="relative w-64 h-64 mx-auto">
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 blur opacity-75"></div>
             <img
-              src="\pradip.jpeg"
+              src="\sandip.jpeg"
               alt="Profile"
               className="relative rounded-full w-full h-full object-cover border-4 border-indigo-600"
             />
