@@ -25,7 +25,6 @@ export function Chatbot(props:Props) {
   };
 
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
-  console.log("VITE_GEMINI_API_KEY",genAI)
   const model = genAI.getGenerativeModel({ model:"gemini-2.5-flash-lite",
     systemInstruction: `
     You are a helpful assistant created by Sandip, a senior AI/ML expert. 
