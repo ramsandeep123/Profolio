@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MessageSquare, Send, X, Loader2 } from 'lucide-react';
+import { MessageSquare, Send, X, Sparkles, Bot } from 'lucide-react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 interface Message {
@@ -53,8 +53,8 @@ export function Chatbot(props:Props) {
 
   useEffect(() => {
     scrollToBottom();
-    
-  }, [messages]);
+    if(openbyparent && !isOpen) setIsOpen(true);
+  }, [messages, openbyparent]);
 
   const handleSend = async () => {
     if (!input.trim()) return;
@@ -83,28 +83,61 @@ export function Chatbot(props:Props) {
     }
   };
 
+  const closeChat = async () => {
+      await setClose();
+      setIsOpen(false);
+      setMessages([]);
+  }
+
   return (
-    <div className="fixed bottom-4 right-4 z-50">
-      {!isOpen && !openbyparent ? (
+    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+      {/* Floating Toggle Button */}
+      {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="bg-indigo-600 hover:bg-indigo-700 text-white rounded-full p-4 shadow-lg transition-all duration-200 ease-in-out"
+          className="group relative flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 shadow-[0_0_20px_rgba(79,70,229,0.5)] hover:shadow-[0_0_30px_rgba(79,70,229,0.8)] transition-all duration-300 hover:scale-110"
         >
-          <MessageSquare className="w-6 h-6" />
+          <div className="absolute inset-0 rounded-full bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
+          <MessageSquare className="w-6 h-6 text-white" />
+          <span className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full border-2 border-[#030014]"></span>
         </button>
-      ) : (
-        <div className="bg-gray-900 rounded-lg shadow-xl w-[350px] h-[500px] flex flex-col">
-          <div className="p-4 bg-indigo-600 rounded-t-lg flex justify-between items-center">
-            <h3 className="text-white font-semibold">AI Assistant</h3>
+      )}
+
+      {/* Main Chat Window */}
+      {isOpen && (
+        <div className="w-[350px] h-[500px] flex flex-col glass-card rounded-2xl overflow-hidden border border-white/10 animate-slide-up shadow-2xl">
+          {/* Header */}
+          <div className="p-4 bg-gradient-to-r from-indigo-600/80 to-purple-600/80 backdrop-blur-md flex justify-between items-center border-b border-white/10">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-white/10 rounded-lg">
+                <Bot className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <h3 className="text-white font-semibold text-sm">AI Assistant</h3>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                  <span className="text-xs text-indigo-100">Online</span>
+                </div>
+              </div>
+            </div>
             <button
-              onClick={async()=> {await setClose() ; await setIsOpen(false) ; setMessages([]) }}
-              className="text-white hover:text-gray-200 transition-colors"
+              onClick={closeChat}
+              className="p-2 hover:bg-white/10 rounded-full transition-colors text-white/80 hover:text-white"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
           
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
+          {/* Messages Area */}
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-indigo-500/30 scrollbar-track-transparent">
+            {messages.length === 0 && (
+                <div className="flex flex-col items-center justify-center h-full text-center text-gray-400 space-y-4">
+                    <div className="p-4 rounded-full bg-indigo-500/10 mb-2">
+                        <Sparkles className="w-8 h-8 text-indigo-400" />
+                    </div>
+                    <p className="text-sm">Ask me about LLMs, AI Agents,<br/>or custom development.</p>
+                </div>
+            )}
             {messages.map((message, index) => (
               <div
                 key={index}
@@ -113,10 +146,10 @@ export function Chatbot(props:Props) {
                 }`}
               >
                 <div
-                  className={`max-w-[80%] rounded-lg p-3 ${
+                  className={`max-w-[80%] rounded-2xl p-4 text-sm leading-relaxed ${
                     message.role === 'user'
-                      ? 'bg-indigo-600 text-white'
-                      : 'bg-gray-800 text-gray-200'
+                      ? 'bg-gradient-to-br from-indigo-600 to-purple-600 text-white shadow-lg rounded-tr-none'
+                      : 'bg-white/5 border border-white/10 text-gray-200 rounded-tl-none backdrop-blur-sm'
                   }`}
                 >
                   {message.content}
@@ -125,31 +158,37 @@ export function Chatbot(props:Props) {
             ))}
             {isLoading && (
               <div className="flex justify-start">
-                <div className="bg-gray-800 rounded-lg p-3">
-                  <Loader2 className="w-5 h-5 animate-spin text-indigo-400" />
+                <div className="bg-white/5 border border-white/10 rounded-2xl rounded-tl-none p-4 flex gap-2 items-center">
+                  <span className="w-2 h-2 bg-indigo-400 rounded-full animate-bounce"></span>
+                  <span className="w-2 h-2 bg-indigo-400 rounded-full animate-bounce delay-75"></span>
+                  <span className="w-2 h-2 bg-indigo-400 rounded-full animate-bounce delay-150"></span>
                 </div>
               </div>
             )}
             <div ref={messagesEndRef} />
           </div>
 
-          <div className="p-4 border-t border-gray-800">
-            <div className="flex space-x-2">
+          {/* Input Area */}
+          <div className="p-4 bg-black/20 border-t border-white/5 backdrop-blur-md">
+            <div className="flex gap-2 relative">
               <input
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSend()}
                 placeholder="Type your message..."
-                className="flex-1 bg-gray-800 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="flex-1 bg-white/5 border border-white/10 text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-indigo-500/50 focus:bg-white/10 transition-all placeholder:text-gray-500"
               />
               <button
                 onClick={handleSend}
                 disabled={isLoading || !input.trim()}
-                className="bg-indigo-600 text-white rounded-lg px-4 py-2 hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="p-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg hover:shadow-indigo-500/25"
               >
-                <Send className="w-5 h-5" />
+                <Send className="w-4 h-4" />
               </button>
+            </div>
+            <div className="text-center mt-2">
+                <p className="text-[10px] text-gray-500">Powered by Gemini Pro</p>
             </div>
           </div>
         </div>
