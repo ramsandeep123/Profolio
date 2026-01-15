@@ -213,7 +213,7 @@ function App() {
                    <img src="/newsan.png" alt="Sandip - AI Expert" className="w-full h-full object-cover scale-110 hover:scale-100 transition-transform duration-700" />
                 </div>
                 
-                {/* Float Cards */}
+    
                 <div className="absolute top-12 -right-12 md:-right-24 p-4 rounded-xl glass-panel animate-float flex items-center gap-3 border-l-4 border-indigo-500 z-20">
                   <div className="p-2 rounded-lg bg-indigo-500/20">
                     <Brain className="w-6 h-6 text-indigo-300" />
