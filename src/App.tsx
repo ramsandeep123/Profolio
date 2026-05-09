@@ -210,7 +210,7 @@ function App() {
               <div className="relative w-full h-full rounded-full border-2 border-white/10 glass-panel p-2">
                 <div className="w-full h-full rounded-full overflow-hidden relative">
                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#030014]/80 z-10"></div>
-                   <img src="/newsan.png" alt="Sandip - AI Expert" className="w-full h-full object-cover scale-110 hover:scale-100 transition-transform duration-700" />
+                   <img src="/sandip.jpeg" alt="Sandip - AI Expert" className="w-full h-full object-cover scale-110 hover:scale-100 transition-transform duration-700" />
                 </div>
                 
     
